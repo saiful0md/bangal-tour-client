@@ -1,4 +1,4 @@
-import { FaGoogle } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
@@ -32,8 +32,8 @@ const SocialLogIn = () => {
             })
     }
     return (
-        <div className="flex">
-            <FaGoogle onClick={handleGoogleLogin} className="text-4xl cursor-pointer border-[rgba(68,68,68,1)] border p-2 rounded-full"></FaGoogle> <span>continue with google</span>
+        <div className="flex items-center border-[rgba(68,68,68,1)] border p-2 gap-3 cursor-pointer rounded-lg hover:bg-[#D1A054] hover:text-white">
+            <FcGoogle onClick={handleGoogleLogin} className="text-3xl"></FcGoogle> <span className="text-md">continue with google</span>
         </div>
     );
 };

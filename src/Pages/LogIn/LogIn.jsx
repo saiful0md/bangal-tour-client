@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import SocialLogin from "../../component/SocialLogin";
@@ -37,9 +38,9 @@ const LogIn = () => {
 
     return (
         <div className="loginBg h-[900px] pt-12">
-            {/* <Helmet>
-                <title>Bistro Boss | Login</title>
-            </Helmet> */}
+            <Helmet>
+                <title>Bangal Tour | Login</title>
+            </Helmet>
             <div className="max-w-6xl mx-auto loginBg " >
                 <div className="hero-content flex-col gap-10 lg:flex-row py-12  " >
                     <img src={''} alt="" />
@@ -67,8 +68,7 @@ const LogIn = () => {
                             <Link to={'/signUp'} className="text-[#D1A054] text-center font-medium">New here? Create a New Account</Link>
                         </form>
                         <div className="text-center">
-                            <p>Or sign in with</p>
-                            <div className="flex gap-6 justify-center mt-6">
+                            <div className="flex gap-6 justify-center">
                                 {/* google */}
                                 <SocialLogin></SocialLogin>
                             </div>

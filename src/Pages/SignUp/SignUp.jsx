@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -46,9 +47,9 @@ const SignUp = () => {
     }
     return (
         <div className="signUpBg h-[900px] py-12">
-            {/* <Helmet>
+            <Helmet>
                 <title>Bangal Tour | SignUp</title>
-            </Helmet> */}
+            </Helmet>
             <div className="max-w-6xl mx-auto signUpBg " >
                 <div className="hero-content flex-col gap-10 lg:flex-row-reverse py-12 " >
                     {/* <img src={authintiaction} alt="" /> */}
@@ -102,7 +103,7 @@ const SignUp = () => {
                             <Link to={'/login'} className="text-[#D1A054] text-center font-medium">Already registered? Go to log in</Link>
                         </form>
                         <div className="text-center">
-                            <div className="flex gap-6 justify-center mt-6">
+                            <div className="flex gap-6 justify-center">
                                 {/* google */}
                                 <SocialLogIn></SocialLogIn>
                             </div>
