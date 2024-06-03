@@ -3,7 +3,7 @@ import useAuth from "../../../hooks/useAuth";
 
 
 const Navbar = () => {
-    const {user, logOut,} = useAuth()
+    const { user, logOut, } = useAuth()
     const handleSignOut = () => {
         logOut()
             .then(() => { })
@@ -20,7 +20,7 @@ const Navbar = () => {
         {
             user ? <>
 
-                <button onClick={handleSignOut} className=' btn-sm btn-ghost'>SignOut</button>
+                <button onClick={handleSignOut} className='btn-ghost px-3 rounded-lg  lg:mr-2'>SignOut</button>
                 <div className="dropdown dropdown-end text-black">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-sm btn-circle avatar">
                         <div className="w-10 rounded-full">
@@ -28,8 +28,9 @@ const Navbar = () => {
                         </div>
                     </div>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                        <li>{user?.displayName}</li>
-                        <li>{user?.email}</li>
+                        <li><button>{user?.displayName}</button></li>
+                        <li><button>{user?.email}</button></li>
+                        <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
                     </ul>
                 </div>
             </> : <>
@@ -38,8 +39,9 @@ const Navbar = () => {
         }
     </>
     return (
-        <div className="navbar bg-base-100">
-            <div className="navbar-start">
+
+        <div className="navbar text-white  justify-between fixed z-10 px-16">
+            <div className="">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
@@ -50,7 +52,7 @@ const Navbar = () => {
                 </div>
                 <img src="https://i.ibb.co/TH9qJRg/Orange-and-Blue-Travel-Agency-Logo.png" alt="" />
             </div>
-            <div className="navbar-end hidden lg:flex">
+            <div className=" hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     {navLinks}
                 </ul>

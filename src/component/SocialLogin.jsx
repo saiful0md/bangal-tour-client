@@ -32,8 +32,8 @@ const SocialLogIn = () => {
             })
     }
     return (
-        <div className="flex items-center border-[rgba(68,68,68,1)] border p-2 gap-3 cursor-pointer rounded-lg hover:bg-[#D1A054] hover:text-white">
-            <FcGoogle onClick={handleGoogleLogin} className="text-3xl"></FcGoogle> <span className="text-md">continue with google</span>
+        <div onClick={handleGoogleLogin} className="flex items-center border-[rgba(68,68,68,1)] border p-2 gap-3 cursor-pointer rounded-lg hover:bg-[#D1A054] hover:text-white">
+            <FcGoogle  className="text-3xl"></FcGoogle> <span className="text-md">continue with google</span>
         </div>
     );
 };

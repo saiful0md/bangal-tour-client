@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Root from '../Layout/Root';
-import Home from '../Pages/Home/Home';
+import Home from '../Pages/Home/Home/Home';
 import LogIn from '../Pages/LogIn/LogIn';
 import SignUp from '../Pages/SignUp/SignUp';
 
@@ -23,6 +23,10 @@ const Router = createBrowserRouter([
             }
         ]
     },
+    {
+        path:'/dashboard',
+        element:<></>,
+    }
 ]);
 
 export default Router;
