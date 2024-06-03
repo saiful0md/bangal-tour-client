@@ -9,7 +9,7 @@ import 'swiper/css/pagination';
 
 // import required modules
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-import BannerText from '../../../component/BannerText/BannerText';
+import BannerText from '../../../component/BannerText';
 
 const Banner = () => {
     return (
@@ -25,7 +25,7 @@ const Banner = () => {
             }}
             navigation={true}
             modules={[Autoplay, Pagination, Navigation]}
-            className="mySwiper rounded-xl"
+            className="mySwiper rounded-xl  py-0 px-0 mb-20 h-[500px]"
         >
             <SwiperSlide>
                 <div style={{ backgroundImage: 'url(https://i.ibb.co/8KKWBCd/hammock-74190-2012.jpg)' }}

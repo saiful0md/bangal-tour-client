@@ -9,7 +9,6 @@ const LogIn = () => {
     const { signIn } = useAuth();
     const navigate = useNavigate()
     const location = useLocation()
-    const from = location?.state?.from?.pathname || '/';
     const handleLogin = e => {
         e.preventDefault()
         const form = e.target;
@@ -24,7 +23,7 @@ const LogIn = () => {
                         text: "Sign in Successfully.",
                         icon: "success"
                     });
-                    navigate(from, { replace: true })
+                    navigate(location.state || '/')
                 }
             })
             .catch(error => {
@@ -37,11 +36,11 @@ const LogIn = () => {
     }
 
     return (
-        <div className="loginBg h-[900px] pt-12">
+        <div className=" h-[900px] pt-12">
             <Helmet>
                 <title>Bangal Tour | Login</title>
             </Helmet>
-            <div className="max-w-6xl mx-auto loginBg " >
+            <div className="max-w-6xl mx-auto  " >
                 <div className="hero-content flex-col gap-10 lg:flex-row py-12  " >
                     <img src={''} alt="" />
                     <div className="card shrink-0 w-full max-w-md  ">
