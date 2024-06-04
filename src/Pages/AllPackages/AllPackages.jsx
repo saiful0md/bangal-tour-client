@@ -1,11 +1,19 @@
+import { useQuery } from "@tanstack/react-query";
 import PackageCart from "../../component/PackageCart";
-import usePackages from "../../hooks/usePackages";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 
 const AllPackages = () => {
-    const [packages] = usePackages()
+    const axiosPublic = useAxiosPublic();
+    const { data: packages = [],  } = useQuery({
+        queryKey: ['packages'],
+        queryFn: async () => {
+            const res = await axiosPublic.get('/packages')
+            return res.data
+        }
+    })
     return (
-        <div className='grid  md:grid-cols-2 lg:grid-cols-3 gap-6 pt-24'>
+        <div className='grid  md:grid-cols-2 lg:grid-cols-3 gap-6 my-4'>
             {
                 packages.map(item => <PackageCart key={item._id} item={item}></PackageCart>)
             }

@@ -11,9 +11,10 @@ import { EffectCoverflow, Pagination } from 'swiper/modules';
 
 const video1 = 'https://videos.pexels.com/video-files/1739010/1739010-sd_640_360_30fps.mp4'
 const video2 = 'https://videos.pexels.com/video-files/5139026/5139026-sd_640_360_30fps.mp4'
+const video3 = 'https://videos.pexels.com/video-files/10230538/10230538-sd_640_360_30fps.mp4'
 const OverviewVideo = () => {
     return (
-     
+
         <Swiper
             effect={'coverflow'}
             grabCursor={true}
@@ -31,22 +32,13 @@ const OverviewVideo = () => {
             className="mySwiper"
         >
             <SwiperSlide>
-            <video src={video1} controls  muted className="" ></video>
+                <video src={video1} controls muted className="" ></video>
             </SwiperSlide>
             <SwiperSlide>
-            <video src={video2} controls  muted className="" ></video>
+                <video src={video2} controls muted className="" ></video>
             </SwiperSlide>
             <SwiperSlide>
-            <video src={video1} controls  muted className="" ></video>
-            </SwiperSlide>
-            <SwiperSlide>
-            <video src={video1} controls  muted className="" ></video>
-            </SwiperSlide>
-            <SwiperSlide>
-            <video src={video1} controls  muted className="" ></video>
-            </SwiperSlide>
-            <SwiperSlide>
-            <video src={video1} controls  muted className="" ></video>
+                <video src={video3} controls muted className="" ></video>
             </SwiperSlide>
         </Swiper>
     );

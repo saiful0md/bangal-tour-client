@@ -9,7 +9,9 @@ const Home = () => {
             <Helmet>
                 <title>Bangal Tour | Home</title>
             </Helmet>
-            <Banner></Banner>
+            <div className="max-w-[1210px] mx-auto">
+                <Banner></Banner>
+            </div>
             <TravelGuide></TravelGuide>
         </div>
     );

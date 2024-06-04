@@ -10,7 +10,6 @@ const SocialLogIn = () => {
     const { googleSignin } = useAuth();
     const navigate = useNavigate()
     const location = useLocation()
-    const from = location?.state?.from?.pathname || '/';
     const handleGoogleLogin = () => {
         googleSignin()
             .then(result => {
@@ -27,7 +26,7 @@ const SocialLogIn = () => {
                                 title: "Sign in successfully"
                             })
                         }
-                        navigate(from, {replace:true})
+                        navigate(location?.state || '/')
                     })
             })
     }
