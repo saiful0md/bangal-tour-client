@@ -1,11 +1,20 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 
 const Dashboard = () => {
     const isAdmin = true
     return (
         <div className="flex">
-            <div className="w-64 h-screen bg-amber-300 text-white">
+            <Helmet>
+                <title>Bangal Tour | Dashboard</title>
+            </Helmet>
+            <div className="w-64 min-h-screen bg-amber-500 text-white">
+                <div className="mb-10 mt-6 pl-6 shadow-2xl border border-black bg-gray-600 bg-opacity-60  mx-2 rounded-lg">
+                    <Link to={'/'}>
+                        <img src="https://i.ibb.co/TH9qJRg/Orange-and-Blue-Travel-Agency-Logo.png" alt="" />
+                    </Link>
+                </div>
                 <ul className="menu">
                     {
                         isAdmin ?

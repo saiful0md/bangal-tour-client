@@ -4,45 +4,36 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import SocialLogIn from "../../component/SocialLogin";
 import useAuth from "../../hooks/useAuth";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 
 const SignUp = () => {
-    const { createUser, updateUserProfile } = useAuth()
-    const axiosPublic = useAxiosPublic()
+    const { createUser, updateUserProfile, setUser } = useAuth()
     const navigate = useNavigate()
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = (data) => {
         createUser(data.email, data.password)
-            .then(result => {
-                console.log(result.user);
+            .then(() => {
                 updateUserProfile(data.name, data.photoUrl)
                     .then(() => {
-                        // create user and insert the database
-                        const userInfo = {
-                            name: data.name,
-                            email: data.email
-                        }
-                        axiosPublic.post('/users', userInfo)
-                            .then(res => {
-                                if (res.data.insertedId) {
-                                    Swal.fire({
-                                        title: "Sign UP!",
-                                        text: "SignUp Successfully.",
-                                        icon: "success"
-                                    });
-                                    reset()
-                                    navigate('/')
-                                }
-                            })
+                        setUser({ ...data.user, photoURL: data.photoUrl, displayName: data.name })
+                        Swal.fire({
+                            title: "Success!",
+                            text: 'Register Successfully',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        })
+                        reset()
+                        navigate( '/')
+
                     })
             })
             .catch(error => {
                 Swal.fire({
-                    title: "Error!",
-                    text: error,
-                    icon: "error"
-                });
+                    title: 'Error!',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonText: 'try again'
+                })
             })
     }
     return (

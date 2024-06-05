@@ -13,15 +13,23 @@ const AddPackage = () => {
     const handleAddPackage = async e => {
         e.preventDefault();
         const form = e.target;
-        const packageImage = form.packageImage.value;
-        const packageName = form.packageName.value;
-        const packageDescription = form.packageDescription.value;
+        const image1 = form.packageImage1.value;
+        const image2 = form.packageImage2.value;
+        const image3 = form.packageImage3.value;
+        const image4 = form.packageImage4.value;
+        const name = form.name.value;
+        const description = form.description.value;
         const price = form.price.value;
+        const type = form.type.value;
         const date = startDate
         const packagedata = {
-            packageImage: packageImage,
-            packageName: packageName,
-            packageDescription,
+            image1,
+            image2,
+            image3,
+            image4,
+            name,
+            description,
+            type,
             price,
             date
         }
@@ -35,7 +43,7 @@ const AddPackage = () => {
                     icon: 'success',
                     confirmButtonText: 'OK'
                 })
-                navigate('/managePackages')
+                navigate('/dashboard/managePackages')
             }
             console.log(data);
         }
@@ -64,15 +72,27 @@ const AddPackage = () => {
                         <div className="flex gap-4">
                             <div className="form-control w-1/2">
                                 <label className="label">
-                                    <span className="label-text">Package Image</span>
+                                    <span className="label-text"> Image</span>
                                 </label>
-                                <input type="text" name="packageImage" placeholder="photoUrl" className="input input-bordered" required />
+                                <input type="text" name="packageImage1" placeholder="photoUrl" className="input input-bordered" required />
                             </div>
                             <div className="form-control w-1/2">
                                 <label className="label">
-                                    <span className="label-text">Package Name</span>
+                                    <span className="label-text"> Image</span>
                                 </label>
-                                <input type="text" name="packageName" placeholder="package Name" className="input input-bordered" required />
+                                <input type="text" name="packageImage2" placeholder="photoUrl" className="input input-bordered" required />
+                            </div>
+                            <div className="form-control w-1/2">
+                                <label className="label">
+                                    <span className="label-text"> Image</span>
+                                </label>
+                                <input type="text" name="packageImage3" placeholder="photoUrl" className="input input-bordered" required />
+                            </div>
+                            <div className="form-control w-1/2">
+                                <label className="label">
+                                    <span className="label-text"> Image</span>
+                                </label>
+                                <input type="text" name="packageImage4" placeholder="photoUrl" className="input input-bordered" required />
                             </div>
                         </div>
                         {/* form row 2 */}
@@ -80,11 +100,27 @@ const AddPackage = () => {
 
                             <div className="form-control w-1/2">
                                 <label className="label">
+                                    <span className="label-text">Package Name</span>
+                                </label>
+                                <input type="text" name="name" placeholder="package Name" className="input input-bordered" required />
+                            </div>
+                            <div className="form-control w-1/2">
+                                <label className="label">
                                     <span className="label-text">Date</span>
                                 </label>
                                 <DatePicker className="px-4 border-2 rounded-lg w-full py-2.5 outline-none" selected={startDate} onChange={(date) => setStartDate(date)} />
                             </div>
 
+
+                        </div>
+                        {/* 3 row */}
+                        <div className="flex gap-4">
+                            <div className="form-control w-1/2">
+                                <label className="label">
+                                    <span className="label-text">Type</span>
+                                </label>
+                                <input type="text" name="type" placeholder="Type" className="input input-bordered" required />
+                            </div>
                             <div className="form-control w-1/2">
                                 <label className="label">
                                     <span className="label-text">Price</span>
@@ -92,13 +128,13 @@ const AddPackage = () => {
                                 <input type="text" name="price" placeholder="Price" className="input input-bordered" required />
                             </div>
                         </div>
-                        {/* 3 row */}
+                        {/* 4 row */}
                         <div className="flex gap-4">
                             <div className="form-control w-full">
                                 <label className="label">
                                     <span className="label-text">Description</span>
                                 </label>
-                                <input type="text" name="packageDescription" placeholder="Description" className="input input-bordered" required />
+                                <input type="text" name="description" placeholder="Description" className="input input-bordered" required />
                             </div>
                         </div>
                         <div className="form-control mt-6">

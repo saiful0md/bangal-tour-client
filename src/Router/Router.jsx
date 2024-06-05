@@ -12,7 +12,7 @@ import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 import Home from '../Pages/Home/Home/Home';
 import LogIn from '../Pages/LogIn/LogIn';
 import SignUp from '../Pages/SignUp/SignUp';
-import PackageDetails from '../component/PackageDetails/PackageDetails';
+import PackagesDetails from '../component/PackageDetails/PackagesDetails';
 
 const Router = createBrowserRouter([
     {
@@ -38,7 +38,7 @@ const Router = createBrowserRouter([
             },
             {
                 path:'/packageDetails/:id',
-                element:<PackageDetails></PackageDetails>
+                element:<PackagesDetails></PackagesDetails>
             }
         ]
     },

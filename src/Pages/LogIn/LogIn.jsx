@@ -44,7 +44,7 @@ const LogIn = () => {
                 <div className="hero-content flex-col gap-10 lg:flex-row py-12  " >
                     <img src={''} alt="" />
                     <div className="card shrink-0 w-full max-w-md  ">
-                        <h1 className="text-5xl text-black text-center py-6 font-bold">Login</h1>
+                        <h1 className="text-5xl text-black text-center py-6 font-bold">Login Now</h1>
                         <form onSubmit={handleLogin} className="card-body ">
                             <div className="form-control">
                                 <label className="label">

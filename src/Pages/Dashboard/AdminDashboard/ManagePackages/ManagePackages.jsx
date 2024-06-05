@@ -68,13 +68,13 @@ const ManagePackages = () => {
                                     <div className="flex items-center gap-3">
                                         <div className="avatar">
                                             <div className="mask mask-squircle w-24 h-24">
-                                                <img src={item.image} alt="Avatar Tailwind CSS Component" />
+                                                <img src={item.image1} alt={item.name} />
                                             </div>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    {item.title}
+                                    {item.name}
                                 </td>
                                 <td> {item.type}</td>
                                 <td> &#8378;{item.price}</td>

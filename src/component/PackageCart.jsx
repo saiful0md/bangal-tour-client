@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import useAuth from '../hooks/useAuth';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 const PackageCart = ({ item }) => {
-    const { title, image, type, price, _id } = item;
+    const { title, image1, type, price, _id } = item;
     const { user } = useAuth()
     const navigate = useNavigate();
     const location = useLocation()
@@ -18,7 +18,7 @@ const PackageCart = ({ item }) => {
                 packageId: _id,
                 email: user.email,
                 title,
-                image,
+                image1,
                 price,
                 type
             }
@@ -52,7 +52,7 @@ const PackageCart = ({ item }) => {
     }
     return (
         <div className=" rounded  shadow-lg">
-            <img className="w-full h-[300px]" src={image} alt={title} />
+            <img className="w-full h-[300px]" src={image1} alt={title} />
             <div className="px-6  py-4">
                 <div className="font-bold text-xl mb-2">{title}</div>
                 <p className="text-gray-700 text-base">{type}</p>
