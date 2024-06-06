@@ -52,7 +52,7 @@ const ManagePackages = () => {
                             <th>
                             </th>
                             <th>Image</th>
-                            <th>Title</th>
+                            <th>Name</th>
                             <th>Type</th>
                             <th>Price</th>
                             <th></th>

@@ -7,6 +7,7 @@ import OverviewVideo from '../../../component/OverviewVideo/OverviewVideo';
 import PackageCart from '../../../component/PackageCart';
 import TourGuide from '../../../component/TourGuide/TourGuide';
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
+import useGuides from '../../../hooks/useGuides';
 
 
 const TravelGuide = () => {
@@ -18,14 +19,8 @@ const TravelGuide = () => {
             return res.data
         }
     })
-    const { data: guides = [] } = useQuery({
-        queryKey: ['guide'],
-        queryFn: async () => {
-            const res = await axiosPublic.get('/tourGuide')
-            return res.data
-        }
-    })
 
+    const [guides] = useGuides()
     return (
         <div className='md:p-2 p-2 lg:p-0 max-w-6xl mx-auto'>
             <Tabs>
@@ -44,7 +39,7 @@ const TravelGuide = () => {
                     {/* Our Packages Content */}
                     <div className='grid  md:grid-cols-2 lg:grid-cols-3 gap-6 '>
                         {
-                            packages.map(item => <PackageCart key={item._id} item={item}></PackageCart>)
+                            packages.slice(0, 3).map(item => <PackageCart key={item._id} item={item}></PackageCart>)
                         }
                     </div>
                     <div className='flex justify-center'>
@@ -58,8 +53,13 @@ const TravelGuide = () => {
                     {/* Meet Our Tour Guides Content */}
                     <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-6 '>
                         {
-                            guides.map(guide => <TourGuide key={guide._id} items={guide}></TourGuide>)
+                            guides.slice(0, 3).map(guide => <TourGuide key={guide._id} items={guide}></TourGuide>)
                         }
+                    </div>
+                    <div className='flex justify-center'>
+                        <Link to={'/allGuides'}>
+                            <button className='bg-amber-500 hover:bg-amber-600 rounded-lg  text-white px-6 py-2 my-10'>All Packages</button>
+                        </Link>
                     </div>
                 </TabPanel>
             </Tabs>

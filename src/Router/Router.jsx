@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import Dashboard from '../Layout/Dashboard';
 import Root from '../Layout/Root';
 import AllPackages from '../Pages/AllPackages/AllPackages';
+import PackagesDetails from '../Pages/AllPackages/PackageDetails/PackagesDetails';
 import AddPackage from '../Pages/Dashboard/AdminDashboard/AddPackage/AddPackage';
 import AdminProfile from '../Pages/Dashboard/AdminDashboard/AdminProfile/AdminProfile';
 import ManagePackages from '../Pages/Dashboard/AdminDashboard/ManagePackages/ManagePackages';
@@ -10,9 +11,10 @@ import UserProfile from '../Pages/Dashboard/UserDashboard/UserProfile/UserProfil
 import Wishlist from '../Pages/Dashboard/UserDashboard/Wishlist/Wishlist';
 import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 import Home from '../Pages/Home/Home/Home';
+import AllGuides from '../Pages/Home/TravelGuide/AllGuides';
 import LogIn from '../Pages/LogIn/LogIn';
 import SignUp from '../Pages/SignUp/SignUp';
-import PackagesDetails from '../component/PackageDetails/PackagesDetails';
+import TourGuideDetals from '../component/TourGuide/TourGuideDetals';
 
 const Router = createBrowserRouter([
     {
@@ -39,6 +41,14 @@ const Router = createBrowserRouter([
             {
                 path:'/packageDetails/:id',
                 element:<PackagesDetails></PackagesDetails>
+            },
+            {
+                path:'/tourGuideDetails/:id',
+                element:<TourGuideDetals></TourGuideDetals>
+            },
+            {
+                path:'/allGuides',
+                element:<AllGuides></AllGuides>
             }
         ]
     },

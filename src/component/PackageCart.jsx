@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import useAuth from '../hooks/useAuth';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 const PackageCart = ({ item }) => {
-    const { title, image1, type, price, _id } = item;
+    const { name, image1, type, price, _id } = item;
     const { user } = useAuth()
     const navigate = useNavigate();
     const location = useLocation()
@@ -13,21 +13,19 @@ const PackageCart = ({ item }) => {
 
     const toggleWishlist = async () => {
         if (user && user.email) {
-            console.log(user.email, item);
             const packageInfo = {
                 packageId: _id,
                 email: user.email,
-                title,
+                name,
                 image1,
                 price,
                 type
             }
             axiosSecure.post('/wishList', packageInfo)
                 .then(res => {
-                    console.log(res.data);
                     if (res.data.insertedId) {
                         Swal.fire({
-                            title: `${title} Added wishlist`,
+                            title: `${name} Added wishlist`,
                             timer: 2000,
                             icon: 'success'
                         })
@@ -52,11 +50,11 @@ const PackageCart = ({ item }) => {
     }
     return (
         <div className=" rounded  shadow-lg">
-            <img className="w-full h-[300px]" src={image1} alt={title} />
+            <img className="w-full h-[300px]" src={image1} alt={name} />
             <div className="px-6  py-4">
-                <div className="font-bold text-xl mb-2">{title}</div>
-                <p className="text-gray-700 text-base">{type}</p>
-                <p className="text-gray-700 text-base">Price: &#8378; {price}</p>
+                <div className="font-bold text-xl mb-2">{name}</div>
+                <p className="text-gray-700 text-base"><span className="font-bold">Type:</span> {type}</p>
+                <p className="text-gray-700 text-base"><span className="font-bold">Price:</span> &#8378;{price}</p>
                 <div className='flex items-center justify-between'>
                     <button className=" my-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                         <Link to={`/packageDetails/${_id}`}>View Package</Link>
