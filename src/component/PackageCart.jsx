@@ -14,28 +14,56 @@ const PackageCart = ({ item }) => {
     const toggleWishlist = async () => {
         if (user && user.email) {
             const packageInfo = {
-                packageId: _id,
                 email: user.email,
                 name,
                 image1,
                 price,
                 type
             }
-            axiosSecure.post('/wishList', packageInfo)
-                .then(res => {
-                    if (res.data.insertedId) {
-                        Swal.fire({
-                            title: `${name} Added wishlist`,
-                            timer: 2000,
-                            icon: 'success'
-                        })
-                    }
+            try {
+                const { data } = await axiosSecure.post(`/wishList`, packageInfo)
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: "Success!",
+                        text: 'Booked Successfully',
+                        icon: 'success',
+                        timer: 2000,
+                        showConfirmButton: false,
+                    })
+
+                    navigate('/dashboard/wishList')
+                }
+            }
+            catch (err) {
+                Swal.fire({
+                    title: "info!",
+                    text: err.response.data,
+                    icon: 'error',
+                    timer: 2500,
+                    showConfirmButton: false,
                 })
+
+            }
+            // axiosSecure.post('/wishList', packageInfo)
+            //     .then(res => {
+            //         if (res.data.insertedId) {
+            //             Swal.fire({
+            //                 title: `${name} Added wishlist`,
+            //                 timer: 2000,
+            //                 icon: 'success',
+            //                 showConfirmButton:false
+            //             })
+            //         }
+
+            //     })
+            // .then(res=>{
+            //     console.log(error);
+            // })
         }
         else {
             Swal.fire({
                 title: "You are not logged in",
-                text: "please login to add to cart!",
+                text: "please login to add to wishlist!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",

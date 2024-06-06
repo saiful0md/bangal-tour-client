@@ -20,7 +20,8 @@ const SignUp = () => {
                             title: "Success!",
                             text: 'Register Successfully',
                             icon: 'success',
-                            confirmButtonText: 'OK'
+                            timer:2000,
+                            showConfirmButton:false
                         })
                         reset()
                         navigate( '/')

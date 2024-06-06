@@ -21,7 +21,9 @@ const LogIn = () => {
                     Swal.fire({
                         title: "Sign in Success!",
                         text: "Sign in Successfully.",
-                        icon: "success"
+                        icon: "success",
+                        timer:2000,
+                        showConfirmButton:false
                     });
                     navigate(location.state || '/')
                 }
@@ -30,13 +32,15 @@ const LogIn = () => {
                 Swal.fire({
                     title: "Error!",
                     text: error,
-                    icon: "error"
+                    icon: "error",
+                    timer:2000,
+                    confirmButtonText: 'try again'
                 });
             })
     }
 
     return (
-        <div className=" h-[900px] pt-12">
+        <div className="  pt-12">
             <Helmet>
                 <title>Bangal Tour | Login</title>
             </Helmet>

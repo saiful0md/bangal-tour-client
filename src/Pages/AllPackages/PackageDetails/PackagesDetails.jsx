@@ -62,7 +62,8 @@ const PackagesDetails = () => {
                     title: "Success!",
                     text: 'Booked Successfully',
                     icon: 'success',
-                    confirmButtonText: 'OK'
+                    timer:2000,
+                    showConfirmButton: false,
                 })
                 setShowModal(false)
                 // navigate('/bookedServices')
@@ -72,9 +73,11 @@ const PackagesDetails = () => {
             Swal.fire({
                 title: "info!",
                 text: err.response.data,
-                icon: 'success',
-                confirmButtonText: 'Done'
+                icon: 'error',
+                timer:2500,
+                showConfirmButton: false,
             })
+            setShowModal(false)
         }
 
     }
