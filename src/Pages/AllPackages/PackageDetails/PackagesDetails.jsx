@@ -62,9 +62,11 @@ const PackagesDetails = () => {
             guide,
             price,
             image1,
+            type,
             image2,
             image3,
             image4,
+            status: 'In Review'
         }
 
         try {
@@ -206,9 +208,15 @@ const PackagesDetails = () => {
                         </div>
                         <div className="form-control ">
                             <label className="label">
+                                <span className="label-text">Type</span>
+                            </label>
+                            <input type="text" name="Type" readOnly defaultValue={type} placeholder="" className="input input-bordered" required />
+                        </div>
+                        <div className="form-control ">
+                            <label className="label">
                                 <span className="label-text">Price</span>
                             </label>
-                            <input type="text" name="price" readOnly defaultValue={price} placeholder="Price" className="input input-bordered" required />
+                            <input type="text" name="price" readOnly defaultValue={price} placeholder="" className="input input-bordered" required />
                         </div>
                         <div className="form-control w-full">
                             <label className="label">

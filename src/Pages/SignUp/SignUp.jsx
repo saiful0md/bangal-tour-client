@@ -36,19 +36,6 @@ const SignUp = () => {
                                 navigate(location?.state || '/')
                             })
                     })
-                // .then(() => {
-                //     setUser({ ...data.user, photoURL: data.photoUrl, displayName: data.name })
-                //     Swal.fire({
-                //         title: "Success!",
-                //         text: 'Register Successfully',
-                //         icon: 'success',
-                //         timer:2000,
-                //         showConfirmButton:false
-                //     })
-                //     reset()
-                //     navigate( '/')
-
-                // })
             })
             .catch(error => {
                 Swal.fire({

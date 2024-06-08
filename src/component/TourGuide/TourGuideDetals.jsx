@@ -14,7 +14,7 @@ const TourGuideDetals = () => {
         }
         loadData()
     }, [axiosSecure, id])
-    const {  name, image, contactDetails, education, skills, workExperience } = guideData
+    const { name, image, contactDetails, education, skills, workExperience } = guideData
     return (
         <div className="max-w-3xl mx-auto my-10">
             <div className="card  bg-base-100 shadow-xl">

@@ -7,6 +7,7 @@ import AddPackage from '../Pages/Dashboard/AdminDashboard/AddPackage/AddPackage'
 import AdminProfile from '../Pages/Dashboard/AdminDashboard/AdminProfile/AdminProfile';
 import ManagePackages from '../Pages/Dashboard/AdminDashboard/ManagePackages/ManagePackages';
 import ManageUsers from '../Pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers';
+import Booking from '../Pages/Dashboard/UserDashboard/Booking/Booking';
 import UserProfile from '../Pages/Dashboard/UserDashboard/UserProfile/UserProfile';
 import WishListDetails from '../Pages/Dashboard/UserDashboard/Wishlist/WishListDetails';
 import Wishlist from '../Pages/Dashboard/UserDashboard/Wishlist/Wishlist';
@@ -77,6 +78,10 @@ const Router = createBrowserRouter([
                 element: <AdminRoute><ManagePackages></ManagePackages></AdminRoute>
             },
             // User Routes
+            {
+                path:'bookings',
+                element:<Booking></Booking>
+            },
             {
                 path: 'wishList',
                 element: <Wishlist></Wishlist>

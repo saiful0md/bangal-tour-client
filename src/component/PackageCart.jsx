@@ -5,33 +5,34 @@ import Swal from 'sweetalert2';
 import useAuth from '../hooks/useAuth';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 const PackageCart = ({ item }) => {
-    const { name, image1, image2, image3, image4, type, price, _id , description} = item;
+    const { name, image1, image2, image3, image4, type, price, _id, description } = item;
     const { user } = useAuth()
     const navigate = useNavigate();
     const location = useLocation()
     const axiosSecure = useAxiosSecure()
 
-    const toggleWishlist = async () => {
+    const handleWishlist = async () => {
         if (user && user.email) {
             const packageInfo = {
                 userEmail: user.email,
-                userImage:user.photoURL,
+                userImage: user.photoURL,
                 image1,
                 image2,
                 image3,
                 image4,
                 price,
+                id: _id,
                 type,
                 description,
                 name,
-                userName:user.displayName,
+                userName: user.displayName,
             }
             try {
                 const { data } = await axiosSecure.post(`/wishList`, packageInfo)
                 if (data.insertedId) {
                     Swal.fire({
                         title: "Success!",
-                        text: 'Booked Successfully',
+                        text: ` Successfully added Wishlist ${name}`,
                         icon: 'success',
                         timer: 2000,
                         showConfirmButton: false,
@@ -77,8 +78,8 @@ const PackageCart = ({ item }) => {
                     <button className=" my-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                         <Link to={`/packageDetails/${_id}`}>View Package</Link>
                     </button>
-                    <button><FaHeart onClick={toggleWishlist}
-                    className={`text-2xl `}
+                    <button><FaHeart onClick={handleWishlist}
+                        className={`text-2xl `}
                     ></FaHeart></button>
                 </div>
             </div>

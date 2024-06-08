@@ -13,7 +13,7 @@ const Wishlist = () => {
     const { data: wishList = [], refetch } = useQuery({
         queryKey: ['wishList', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`wishList/${user?.email}`)
+            const res = await axiosSecure.get(`/wishList/${user?.email}`)
             return res.data
         }
     })
@@ -46,7 +46,7 @@ const Wishlist = () => {
                             title: "Error!",
                             text: ` ${error}`,
                             icon: "error",
-                            timer: 2000,
+                            timer: 1500,
                             showConfirmButton: false,
                         });
                     });
@@ -74,15 +74,13 @@ const Wishlist = () => {
                         {/* head */}
                         <thead>
                             <tr>
-                                <th>
-                                </th>
+                                <th>#</th>
                                 <th>Image</th>
                                 <th>Name</th>
                                 <th>Type</th>
                                 <th>Price</th>
                                 <th>View Details</th>
                                 <th>Delete</th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -106,7 +104,7 @@ const Wishlist = () => {
                                     <td> {item.type}</td>
                                     <td> &#8378;{item.price}</td>
                                     <th>
-                                        <Link to={`/dashboard/wishList/${item._id}`} className="btn btn-ghost btn-xs"><FaEye className="text-lg"></FaEye></Link>
+                                        <Link to={`/packageDetails/${item.id}`} className="btn btn-ghost btn-xs"><FaEye className="text-lg"></FaEye></Link>
                                     </th>
                                     <th>
                                         <button onClick={() => handleDelete(item._id)} className="btn btn-ghost btn-xs"><FaTrashAlt className="text-lg"></FaTrashAlt></button>

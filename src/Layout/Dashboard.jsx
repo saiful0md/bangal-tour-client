@@ -5,7 +5,7 @@ import useAuth from "../hooks/useAuth";
 
 
 const Dashboard = () => {
-    const {logOut} =useAuth();
+    const { logOut } = useAuth();
     const handleSignOut = () => {
         logOut()
             .then(() => { })
@@ -38,7 +38,7 @@ const Dashboard = () => {
                             :
                             <>
                                 <li><NavLink to={'/dashboard/userProfile'}>My Profile</NavLink></li>
-                                <li><NavLink to={'/dashboard/userBookings'}>My Bookings</NavLink></li>
+                                <li><NavLink to={'/dashboard/bookings'}>My Bookings</NavLink></li>
                                 <li><NavLink to={'/dashboard/wishList'}>My Wishlist</NavLink></li>
                                 <li><NavLink to={'/dashboard/reqAsmin'}>Request to Admin</NavLink></li>
                             </>
@@ -46,6 +46,7 @@ const Dashboard = () => {
                     {/* sheard menu */}
                     <div className="divider"></div>
                     <li><NavLink to={'/'}>Home</NavLink></li>
+                    <li><NavLink to={'/allPackages'}>All Pakages</NavLink></li>
                     <li><NavLink to={'/contact'}>Contact Us</NavLink></li>
                     <li><NavLink to={'/about'}>About Us</NavLink></li>
                     <li><button onClick={handleSignOut}>Log Out </button></li>
