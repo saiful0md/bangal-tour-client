@@ -4,28 +4,28 @@ import { Helmet } from "react-helmet-async";
 import { ImCross } from "react-icons/im";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import useAuth from "../../../hooks/useAuth";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useGuides from "../../../hooks/useGuides";
-import TourGuideTable from "./TourGuideTable";
+import useAuth from "../../../../hooks/useAuth";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import useGuides from "../../../../hooks/useGuides";
+import TourGuideTable from "../../../AllPackages/PackageDetails/TourGuideTable";
 
-const PackagesDetails = () => {
+const WishListDetails = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
     const [startDate, setStartDate] = useState(new Date());
     const [showModal, setShowModal] = useState(false)
     const [tourGuide, setTourGuide] = useState('')
-    const [tourGuides, setTourGuides] = useState([])
-    const [packageDetails, setPackage] = useState([])
+    const [packagedata, setPackage] = useState([])
     const { id } = useParams()
     const [guides] = useGuides()
     useEffect(() => {
-        setTourGuides(guides)
         const loadData = async () => {
             try {
-                const { data } = await axiosSecure.get(`/packages/${id}`);
+                const  data  = await axiosSecure.get(`/wishList/${id}`);
+                console.log("Data received:", data.data);
                 setPackage(data);
             } catch (error) {
+                console.log(error);
                 Swal.fire({
                     title: "Error!",
                     text: 'Failed to load package details',
@@ -36,16 +36,14 @@ const PackagesDetails = () => {
             }
         };
         loadData();
-    }, [axiosSecure, guides, id])
-
-    const { name, image1, image2, image3, image4, price, description, type } = packageDetails;
+    }, [axiosSecure, id])
+    const { name, image1, image2, image3, image4, price, description, type } = packagedata;
 
     // modale confirm
     const handleBooking = e => {
         e.preventDefault();
         setShowModal(true)
     }
-    // 
     const handleBookedConfirm = async (e) => {
         e.preventDefault();
         const userName = user.displayName;
@@ -98,18 +96,23 @@ const PackagesDetails = () => {
             <Helmet>
                 <title>Bangal Tour | Package Details</title>
             </Helmet>
-            <div className="card  bg-base-100 shadow-xl rounded-none">
-                <div className="grid md:grid-cols-2 gap-3">
-                    <figure><img className="h-[300px] w-full " src={image1} alt={name} /></figure>
-                    <figure><img className="h-[300px] w-full " src={image2} alt={name} /></figure>
-                    <figure><img className="h-[300px] w-full " src={image3} alt={name} /></figure>
-                    <figure><img className="h-[300px] w-full " src={image4} alt={name} /></figure>
+            <div>
+                <div className="flex justify-center items-center gap-6 my-10 border-b-2 pb-6">
+                    <h2 className="text-3xl font-bold"> Wishlist Details</h2>
                 </div>
-                <div className="card-body">
-                    <h2 className="card-title"><span className="font-bold">Name:</span> {name}</h2>
-                    <p><span className="font-bold">Details:</span> {description}</p>
-                    <p><span className="font-bold">Typs:</span> {type}</p>
-                    <p><span className="font-bold">Price:</span> &#8378;{price}</p>
+                <div className="card  bg-base-100 shadow-xl rounded-none">
+                    <div className="grid md:grid-cols-2 gap-3">
+                        <figure><img className="h-[300px] w-full " src={image1} alt={name} /></figure>
+                        <figure><img className="h-[300px] w-full " src={image2} alt={name} /></figure>
+                        <figure><img className="h-[300px] w-full " src={image3} alt={name} /></figure>
+                        <figure><img className="h-[300px] w-full " src={image4} alt={name} /></figure>
+                    </div>
+                    <div className="card-body">
+                        <h2 className="card-title"><span className="font-bold">Name:</span> {name}</h2>
+                        <p><span className="font-bold">Details:</span> {description}</p>
+                        <p><span className="font-bold">Typs:</span> {type}</p>
+                        <p><span className="font-bold">Price:</span> &#8378;{price}</p>
+                    </div>
                 </div>
             </div>
             {/* Tour plan */}
@@ -187,7 +190,7 @@ const PackagesDetails = () => {
                                 onChange={(e) => setTourGuide(e.target.value)}>
                                 <option value="">Select Tour Guide</option>
                                 {
-                                    tourGuides.map(guide => <option key={guide._id} value={guide.name}>{guide.name}</option>)
+                                    guides.map(guide => <option key={guide._id} value={guide.name}>{guide.name}</option>)
                                 }
                             </select>
                         </div>
@@ -219,4 +222,4 @@ const PackagesDetails = () => {
     );
 };
 
-export default PackagesDetails;
+export default WishListDetails;

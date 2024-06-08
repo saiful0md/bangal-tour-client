@@ -4,29 +4,51 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import SocialLogIn from "../../component/SocialLogin";
 import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 
 const SignUp = () => {
     const { createUser, updateUserProfile, setUser } = useAuth()
     const navigate = useNavigate()
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const axiosPublic = useAxiosPublic()
     const onSubmit = (data) => {
         createUser(data.email, data.password)
             .then(() => {
                 updateUserProfile(data.name, data.photoUrl)
                     .then(() => {
                         setUser({ ...data.user, photoURL: data.photoUrl, displayName: data.name })
-                        Swal.fire({
-                            title: "Success!",
-                            text: 'Register Successfully',
-                            icon: 'success',
-                            timer:2000,
-                            showConfirmButton:false
-                        })
-                        reset()
-                        navigate( '/')
-
+                        const userInfo = {
+                            email: data.email,
+                            name: data.name
+                        }
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                console.log(res.data);
+                                if (res.data) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: "Sign in successfully",
+                                        showConfirmButton:false,
+                                        timer:1500
+                                    })
+                                }
+                                navigate(location?.state || '/')
+                            })
                     })
+                // .then(() => {
+                //     setUser({ ...data.user, photoURL: data.photoUrl, displayName: data.name })
+                //     Swal.fire({
+                //         title: "Success!",
+                //         text: 'Register Successfully',
+                //         icon: 'success',
+                //         timer:2000,
+                //         showConfirmButton:false
+                //     })
+                //     reset()
+                //     navigate( '/')
+
+                // })
             })
             .catch(error => {
                 Swal.fire({

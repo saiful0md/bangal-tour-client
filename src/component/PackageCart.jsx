@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import useAuth from '../hooks/useAuth';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 const PackageCart = ({ item }) => {
-    const { name, image1, type, price, _id } = item;
+    const { name, image1, image2, image3, image4, type, price, _id , description} = item;
     const { user } = useAuth()
     const navigate = useNavigate();
     const location = useLocation()
@@ -14,11 +14,17 @@ const PackageCart = ({ item }) => {
     const toggleWishlist = async () => {
         if (user && user.email) {
             const packageInfo = {
-                email: user.email,
-                name,
+                userEmail: user.email,
+                userImage:user.photoURL,
                 image1,
+                image2,
+                image3,
+                image4,
                 price,
-                type
+                type,
+                description,
+                name,
+                userName:user.displayName,
             }
             try {
                 const { data } = await axiosSecure.post(`/wishList`, packageInfo)
@@ -31,7 +37,6 @@ const PackageCart = ({ item }) => {
                         showConfirmButton: false,
                     })
 
-                    navigate('/dashboard/wishList')
                 }
             }
             catch (err) {
@@ -44,21 +49,6 @@ const PackageCart = ({ item }) => {
                 })
 
             }
-            // axiosSecure.post('/wishList', packageInfo)
-            //     .then(res => {
-            //         if (res.data.insertedId) {
-            //             Swal.fire({
-            //                 title: `${name} Added wishlist`,
-            //                 timer: 2000,
-            //                 icon: 'success',
-            //                 showConfirmButton:false
-            //             })
-            //         }
-
-            //     })
-            // .then(res=>{
-            //     console.log(error);
-            // })
         }
         else {
             Swal.fire({
@@ -88,7 +78,7 @@ const PackageCart = ({ item }) => {
                         <Link to={`/packageDetails/${_id}`}>View Package</Link>
                     </button>
                     <button><FaHeart onClick={toggleWishlist}
-                    // className={`text-2xl ${isWishlist ? 'active' : ''}`}
+                    className={`text-2xl `}
                     ></FaHeart></button>
                 </div>
             </div>

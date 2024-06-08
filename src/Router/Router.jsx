@@ -8,6 +8,7 @@ import AdminProfile from '../Pages/Dashboard/AdminDashboard/AdminProfile/AdminPr
 import ManagePackages from '../Pages/Dashboard/AdminDashboard/ManagePackages/ManagePackages';
 import ManageUsers from '../Pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers';
 import UserProfile from '../Pages/Dashboard/UserDashboard/UserProfile/UserProfile';
+import WishListDetails from '../Pages/Dashboard/UserDashboard/Wishlist/WishListDetails';
 import Wishlist from '../Pages/Dashboard/UserDashboard/Wishlist/Wishlist';
 import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 import Home from '../Pages/Home/Home/Home';
@@ -15,6 +16,7 @@ import AllGuides from '../Pages/Home/TravelGuide/AllGuides';
 import LogIn from '../Pages/LogIn/LogIn';
 import SignUp from '../Pages/SignUp/SignUp';
 import TourGuideDetals from '../component/TourGuide/TourGuideDetals';
+import PriveteRoute from './PriveteRoute';
 
 const Router = createBrowserRouter([
     {
@@ -40,11 +42,11 @@ const Router = createBrowserRouter([
             },
             {
                 path:'/packageDetails/:id',
-                element:<PackagesDetails></PackagesDetails>
+                element:<PriveteRoute><PackagesDetails></PackagesDetails></PriveteRoute>
             },
             {
                 path:'/tourGuideDetails/:id',
-                element:<TourGuideDetals></TourGuideDetals>
+                element:<PriveteRoute><TourGuideDetals></TourGuideDetals></PriveteRoute>
             },
             {
                 path:'/allGuides',
@@ -54,11 +56,15 @@ const Router = createBrowserRouter([
     },
     {
         path:'dashboard',
-        element:<Dashboard></Dashboard>,
+        element:<PriveteRoute><Dashboard></Dashboard></PriveteRoute>,
         children:[
             {
                 path:'wishList',
                 element:<Wishlist></Wishlist>
+            },
+            {
+                path:'wishList/:id',
+                element:<WishListDetails></WishListDetails>
             },
             {
                 path:'userProfile',
