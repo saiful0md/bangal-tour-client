@@ -16,76 +16,80 @@ import AllGuides from '../Pages/Home/TravelGuide/AllGuides';
 import LogIn from '../Pages/LogIn/LogIn';
 import SignUp from '../Pages/SignUp/SignUp';
 import TourGuideDetals from '../component/TourGuide/TourGuideDetals';
+import AdminRoute from './AdminRoute';
 import PriveteRoute from './PriveteRoute';
 
 const Router = createBrowserRouter([
     {
         path: "/",
         element: <Root></Root>,
-        errorElement:<ErrorPage></ErrorPage>,
-        children:[
+        errorElement: <ErrorPage></ErrorPage>,
+        children: [
             {
-                path:'/',
-                element:<Home></Home>
+                path: '/',
+                element: <Home></Home>
             },
             {
-                path:'/login',
-                element:<LogIn></LogIn>
+                path: '/login',
+                element: <LogIn></LogIn>
             },
             {
-                path:'/signUp',
-                element:<SignUp></SignUp>
+                path: '/signUp',
+                element: <SignUp></SignUp>
             },
             {
-                path:'/allPackages',
-                element:<AllPackages></AllPackages>
+                path: '/allPackages',
+                element: <AllPackages></AllPackages>
             },
             {
-                path:'/packageDetails/:id',
-                element:<PriveteRoute><PackagesDetails></PackagesDetails></PriveteRoute>
+                path: '/packageDetails/:id',
+                element: <PriveteRoute><PackagesDetails></PackagesDetails></PriveteRoute>
             },
             {
-                path:'/tourGuideDetails/:id',
-                element:<PriveteRoute><TourGuideDetals></TourGuideDetals></PriveteRoute>
+                path: '/tourGuideDetails/:id',
+                element: <PriveteRoute><TourGuideDetals></TourGuideDetals></PriveteRoute>
             },
             {
-                path:'/allGuides',
-                element:<AllGuides></AllGuides>
+                path: '/allGuides',
+                element: <AllGuides></AllGuides>
             }
         ]
     },
     {
-        path:'dashboard',
-        element:<PriveteRoute><Dashboard></Dashboard></PriveteRoute>,
-        children:[
+        path: 'dashboard',
+        element: <PriveteRoute><Dashboard></Dashboard></PriveteRoute>,
+        children: [
+            // Admin Routes
             {
-                path:'wishList',
-                element:<Wishlist></Wishlist>
+                path: 'adminProfile',
+                element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>
             },
             {
-                path:'wishList/:id',
-                element:<WishListDetails></WishListDetails>
+                path: 'addPackage',
+                element: <AdminRoute><AddPackage></AddPackage></AdminRoute>
             },
             {
-                path:'userProfile',
-                element:<UserProfile></UserProfile>
+                path: 'manageUser',
+                element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
             },
             {
-                path:'adminProfile',
-                element:<AdminProfile></AdminProfile>
+                path: 'managePackages',
+                element: <AdminRoute><ManagePackages></ManagePackages></AdminRoute>
+            },
+            // User Routes
+            {
+                path: 'wishList',
+                element: <Wishlist></Wishlist>
             },
             {
-                path:'addPackage',
-                element:<AddPackage></AddPackage>
+                path: 'wishList/:id',
+                element: <WishListDetails></WishListDetails>
             },
             {
-                path:'manageUser',
-                element:<ManageUsers></ManageUsers>
+                path: 'userProfile',
+                element: <UserProfile></UserProfile>
             },
-            {
-                path:'managePackages',
-                element:<ManagePackages></ManagePackages>
-            }
+
         ]
     }
 ]);

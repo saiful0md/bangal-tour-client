@@ -38,7 +38,7 @@ const PackagesDetails = () => {
         loadData();
     }, [axiosSecure, guides, id])
 
-    const { name, image1, image2, image3, image4, price, description, type } = packageDetails;
+    const { name, image1, image2, image3, image4, plan1, plan2, plan3, plan4, price, description, type } = packageDetails;
 
     // modale confirm
     const handleBooking = e => {
@@ -113,7 +113,45 @@ const PackagesDetails = () => {
                 </div>
             </div>
             {/* Tour plan */}
-
+            <div className="flex flex-col gap-5 my-6">
+                <h2 className="text-3xl">Tour Plan</h2>
+                <div className="collapse collapse-plus bg-base-200">
+                    <input type="radio" name="my-accordion-3" defaultChecked />
+                    <div className="collapse-title text-xl font-medium">
+                       Day 1
+                    </div>
+                    <div className="collapse-content">
+                        <p>{plan1}</p>
+                    </div>
+                </div>
+                <div className="collapse collapse-plus bg-base-200">
+                    <input type="radio" name="my-accordion-3" />
+                    <div className="collapse-title text-xl font-medium">
+                        Day 2
+                    </div>
+                    <div className="collapse-content">
+                        <p>{plan2}</p>
+                    </div>
+                </div>
+                <div className="collapse collapse-plus bg-base-200">
+                    <input type="radio" name="my-accordion-3" />
+                    <div className="collapse-title text-xl font-medium">
+                        Day 3
+                    </div>
+                    <div className="collapse-content">
+                        <p>{plan3}</p>
+                    </div>
+                </div>
+                <div className="collapse collapse-plus bg-base-200">
+                    <input type="radio" name="my-accordion-3" />
+                    <div className="collapse-title text-xl font-medium">
+                        Day 4
+                    </div>
+                    <div className="collapse-content">
+                        <p>{plan4}</p>
+                    </div>
+                </div>
+            </div>
             {/* Guides  */}
             <div>
                 <h2 className="text-3xl font-semibold mt-10">Meet Our Guides</h2>

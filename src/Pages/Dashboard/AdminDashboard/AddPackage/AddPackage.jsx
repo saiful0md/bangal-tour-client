@@ -17,6 +17,10 @@ const AddPackage = () => {
         const image2 = form.packageImage2.value;
         const image3 = form.packageImage3.value;
         const image4 = form.packageImage4.value;
+        const plan1 = form.tourPlan1.value;
+        const plan2 = form.tourPlan2.value;
+        const plan3 = form.tourPlan3.value;
+        const plan4 = form.tourPlan4.value;
         const name = form.name.value;
         const description = form.description.value;
         const price = form.price.value;
@@ -27,6 +31,10 @@ const AddPackage = () => {
             image2,
             image3,
             image4,
+            plan1,
+            plan2,
+            plan3,
+            plan4,
             name,
             description,
             type,
@@ -97,6 +105,33 @@ const AddPackage = () => {
                         </div>
                         {/* form row 2 */}
                         <div className="flex gap-4">
+                            <div className="form-control w-1/2">
+                                <label className="label">
+                                    <span className="label-text"> Tour Plan</span>
+                                </label>
+                                <input type="text" name="tourPlan1" placeholder="Tour Plan" className="input input-bordered" required />
+                            </div>
+                            <div className="form-control w-1/2">
+                                <label className="label">
+                                    <span className="label-text">  Tour Plan</span>
+                                </label>
+                                <input type="text" name="tourPlan2" placeholder="Tour Plan" className="input input-bordered" required />
+                            </div>
+                            <div className="form-control w-1/2">
+                                <label className="label">
+                                    <span className="label-text">  Tour Plan</span>
+                                </label>
+                                <input type="text" name="tourPlan3" placeholder="Tour Plan" className="input input-bordered" required />
+                            </div>
+                            <div className="form-control w-1/2">
+                                <label className="label">
+                                    <span className="label-text">  Tour Plan</span>
+                                </label>
+                                <input type="text" name="tourPlan4" placeholder="Tour Plan" className="input input-bordered" required />
+                            </div>
+                        </div>
+                        {/* form row 3 */}
+                        <div className="flex gap-4">
 
                             <div className="form-control w-1/2">
                                 <label className="label">
@@ -113,7 +148,7 @@ const AddPackage = () => {
 
 
                         </div>
-                        {/* 3 row */}
+                        {/* 4 row */}
                         <div className="flex gap-4">
                             <div className="form-control w-1/2">
                                 <label className="label">
@@ -128,7 +163,7 @@ const AddPackage = () => {
                                 <input type="text" name="price" placeholder="Price" className="input input-bordered" required />
                             </div>
                         </div>
-                        {/* 4 row */}
+                        {/* 5 row */}
                         <div className="flex gap-4">
                             <div className="form-control w-full">
                                 <label className="label">

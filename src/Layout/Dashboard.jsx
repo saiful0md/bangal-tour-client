@@ -1,10 +1,11 @@
 import { Helmet } from "react-helmet-async";
 import { Link, NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../hooks/useAdmin";
 import useAuth from "../hooks/useAuth";
 
 
 const Dashboard = () => {
-    const {logOut} =useAuth()
+    const {logOut} =useAuth();
     const handleSignOut = () => {
         logOut()
             .then(() => { })
@@ -12,7 +13,7 @@ const Dashboard = () => {
                 console.log(error);
             })
     }
-    const isAdmin = true
+    const [isAdmin] = useAdmin()
     return (
         <div className="flex">
             <Helmet>
