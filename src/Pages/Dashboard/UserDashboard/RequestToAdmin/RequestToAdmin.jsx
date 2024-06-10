@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import useAuth from "../../../../hooks/useAuth";
@@ -8,25 +8,47 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 const RequestToAdmin = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
-    const [requested, setRequested] = useState(false);
-    console.log(requested);
-
+    const { data: userData = [], } = useQuery({
+        queryKey: ['users', user?.email],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/users/${user?.email}`)
+            return res.data
+        }
+    })
+    const userInfo = {
+        email: user.email,
+        role: 'tourist',
+        roleStatus: 'requested'
+    }
     const handleRequestToAdmin = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axiosSecure.post('/request-to-admin', { email: user.email });
-            if (data.insertedId) {
-                setRequested(true);
+            const { data } = await axiosSecure.put('/users', userInfo);
+            if (data.modifiedCount > 0) {
                 Swal.fire({
                     title: "Success!",
-                    text: "Your request to become a tour guide has been submitted.",
+                    text: "Your request to become a tour guide has been requested.",
                     icon: "success",
+                    timer: 2000,
+                    showConfirmButton: false,
+                });
+            } else {
+                Swal.fire({
+                    title: "info!",
+                    text: "Please wait for Admin confirmition.",
+                    icon: "info",
                     timer: 2000,
                     showConfirmButton: false,
                 });
             }
         } catch (error) {
-            console.error("An error occurred while submitting the request:", error);
+            Swal.fire({
+                title: "info!",
+                text: "Please wait for Admin confirmition.",
+                icon: "info",
+                timer: 2000,
+                showConfirmButton: false,
+            });
         }
     };
     return (
@@ -38,13 +60,13 @@ const RequestToAdmin = () => {
                 <div className="flex justify-center items-center gap-6 my-10 border-b-2 pb-6">
                     <h2 className="text-3xl font-bold">Request to Become a Tour Guide</h2>
                 </div>
-                {requested ? (
-                    <div role="alert" className="alert alert-success">
+                {userData.roleStatus === 'requested' ? (
+                    <div  className="alert alert-success text-white">
                         <span>Your request to become a tour guide has been submitted.</span>
                     </div>
                 ) : (
                     <div className="flex justify-center">
-                        <button onClick={handleRequestToAdmin} className="btn btn-primary">
+                        <button onClick={handleRequestToAdmin} className="btn bg-amber-500 text-white">
                             Request to Become a Tour Guide
                         </button>
                     </div>

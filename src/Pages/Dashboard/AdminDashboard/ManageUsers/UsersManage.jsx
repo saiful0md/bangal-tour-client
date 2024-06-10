@@ -12,7 +12,6 @@ const UsersManage = () => {
 
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
-
     const [name, setName] = useState("");
     const [selectedRole, setSelectedRole] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
@@ -37,17 +36,9 @@ const UsersManage = () => {
         { value: "tourist", label: "Tourist" },
     ];
 
-    const handleUserRole = async (id, role, email) => {
-        if (email === user.email) {
-            return Swal.fire({
-                title: "Update Failed!",
-                text: "You cannot update your own role.",
-                icon: "error",
-                timer: 1500,
-                showConfirmButton: false
-            });
-        }
-        const response = await axiosSecure.put(`/updateuser?id=${id}&role=${role}`);
+    const handleUserRole = async (id, role) => {
+        const response = await axiosSecure.put(`/users?id=${id}&role=${role}`);
+        console.log(response);
         if (response.data.modifiedCount) {
             Swal.fire({
                 title: "Updated!",
@@ -110,6 +101,7 @@ const UsersManage = () => {
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Status</th>
                                     <th>Role</th>
                                     <th>Make Admin</th>
                                     <th>Make Tour Guide</th>
@@ -121,6 +113,7 @@ const UsersManage = () => {
                                         <td>{index + 1}</td>
                                         <td>{user.name}</td>
                                         <td>{user.email}</td>
+                                        <td>{user.roleStatus}</td>
                                         <td className={`font-medium 
                                     ${user.role === 'admin' && 'text-yellow-500'} 
                                     ${user.role === 'guide' && 'text-green-600'} 
