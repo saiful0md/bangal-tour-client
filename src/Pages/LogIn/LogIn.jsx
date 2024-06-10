@@ -21,7 +21,7 @@ const LogIn = () => {
                         title: "Sign in Success!",
                         text: "Sign in Successfully.",
                         icon: "success",
-                        timer:2000,
+                        timer:1500,
                         showConfirmButton:false
                     });
                     navigate(location.state || '/')

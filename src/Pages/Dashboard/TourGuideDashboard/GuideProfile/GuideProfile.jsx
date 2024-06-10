@@ -2,13 +2,13 @@ import { Helmet } from "react-helmet-async";
 import useAuth from "../../../../hooks/useAuth";
 
 
-const AdminProfile = () => {
-    const { user } = useAuth()
+const GuideProfile = () => {
+    const {user} =useAuth()
     const { displayName, email, photoURL } = user
     return (
         <div>
             <Helmet>
-                <title>Bangal Tour | Admin Profile</title>
+                <title>Bangal Tour | Guide Profile</title>
             </Helmet>
             <div className="max-w-2xl mx-auto my-10">
                 <h2 className="text-3xl font-semibold text-center my-10 ">My Profile</h2>
@@ -24,4 +24,4 @@ const AdminProfile = () => {
     );
 };
 
-export default AdminProfile;
+export default GuideProfile;

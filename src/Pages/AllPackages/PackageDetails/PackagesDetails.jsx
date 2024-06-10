@@ -19,6 +19,7 @@ const PackagesDetails = () => {
     const [packageDetails, setPackage] = useState([])
     const { id } = useParams()
     const [guides] = useGuides()
+    console.log(tourGuide);
     useEffect(() => {
         setTourGuides(guides)
         const loadData = async () => {
@@ -66,7 +67,8 @@ const PackagesDetails = () => {
             image2,
             image3,
             image4,
-            status: 'In Review'
+            status: 'In Review',
+
         }
 
         try {
@@ -120,7 +122,7 @@ const PackagesDetails = () => {
                 <div className="collapse collapse-plus bg-base-200">
                     <input type="radio" name="my-accordion-3" defaultChecked />
                     <div className="collapse-title text-xl font-medium">
-                       Day 1
+                        Day 1
                     </div>
                     <div className="collapse-content">
                         <p>{plan1}</p>

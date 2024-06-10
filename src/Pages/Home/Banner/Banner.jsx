@@ -13,7 +13,7 @@ import BannerText from '../../../component/BannerText';
 
 const Banner = () => {
     return (
-       <div>
+       <div className='md:p-3 lg:p-2 p-2'>
          <Swiper
              spaceBetween={30}
              centeredSlides={true}

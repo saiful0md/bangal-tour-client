@@ -6,10 +6,12 @@ import PackagesDetails from '../Pages/AllPackages/PackageDetails/PackagesDetails
 import AddPackage from '../Pages/Dashboard/AdminDashboard/AddPackage/AddPackage';
 import AdminProfile from '../Pages/Dashboard/AdminDashboard/AdminProfile/AdminProfile';
 import ManagePackages from '../Pages/Dashboard/AdminDashboard/ManagePackages/ManagePackages';
-import ManageUsers from '../Pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers';
+import UsersManage from '../Pages/Dashboard/AdminDashboard/ManageUsers/UsersManage';
+import TourAssign from '../Pages/Dashboard/TourGuideDashboard/AssignedTour/TourAssign';
+import GuideProfile from '../Pages/Dashboard/TourGuideDashboard/GuideProfile/GuideProfile';
 import Booking from '../Pages/Dashboard/UserDashboard/Booking/Booking';
+import RequestToAdmin from '../Pages/Dashboard/UserDashboard/RequestToAdmin/RequestToAdmin';
 import UserProfile from '../Pages/Dashboard/UserDashboard/UserProfile/UserProfile';
-import WishListDetails from '../Pages/Dashboard/UserDashboard/Wishlist/WishListDetails';
 import Wishlist from '../Pages/Dashboard/UserDashboard/Wishlist/Wishlist';
 import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 import Home from '../Pages/Home/Home/Home';
@@ -71,29 +73,42 @@ const Router = createBrowserRouter([
             },
             {
                 path: 'manageUser',
-                element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
+                // element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
+                element: <AdminRoute><UsersManage></UsersManage></AdminRoute>
+                
             },
             {
                 path: 'managePackages',
                 element: <AdminRoute><ManagePackages></ManagePackages></AdminRoute>
             },
+            // Tour Guide routes
+            {
+                path:'guideProfile',
+                element:<GuideProfile></GuideProfile>
+            },
+            {
+                path:'assignedTour',
+                // element:<AssignedTour></AssignedTour>
+                element:<TourAssign></TourAssign>
+            },
             // User Routes
             {
-                path:'bookings',
-                element:<Booking></Booking>
+                path: 'userProfile',
+                element: <UserProfile></UserProfile>
+            },
+            {
+                path: 'bookings',
+                element: <Booking></Booking>
             },
             {
                 path: 'wishList',
                 element: <Wishlist></Wishlist>
             },
             {
-                path: 'wishList/:id',
-                element: <WishListDetails></WishListDetails>
-            },
-            {
-                path: 'userProfile',
-                element: <UserProfile></UserProfile>
-            },
+                path: 'requset-to-admin',
+                element:<RequestToAdmin></RequestToAdmin>
+            }
+
 
         ]
     }

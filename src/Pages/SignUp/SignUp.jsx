@@ -20,17 +20,17 @@ const SignUp = () => {
                         setUser({ ...data.user, photoURL: data.photoUrl, displayName: data.name })
                         const userInfo = {
                             email: data.email,
-                            name: data.name
+                            name: data.name,
+                            role: 'tourist'
                         }
                         axiosPublic.post('/users', userInfo)
                             .then(res => {
-                                console.log(res.data);
                                 if (res.data) {
                                     Swal.fire({
                                         icon: 'success',
                                         title: "Sign in successfully",
-                                        showConfirmButton:false,
-                                        timer:1500
+                                        showConfirmButton: false,
+                                        timer: 1500
                                     })
                                 }
                                 navigate(location?.state || '/')
