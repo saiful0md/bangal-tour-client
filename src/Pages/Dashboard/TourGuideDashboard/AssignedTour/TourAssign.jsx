@@ -8,110 +8,122 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 const TourAssign = () => {
 
     const { user } = useAuth();
-
-    const isEnabled = !!user?.email;
-    const initialData = [];
-    const axiosSecure = useAxiosSecure();
-
-    const { data: guideBookings = [], isLoading, refetch, } = useQuery({
-        queryKey: ["guideBookings", user?.email],
+    const axiosSecure = useAxiosSecure()
+    const { data: bookingData = [], refetch } = useQuery({
+        queryKey: ['booking', user.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/booking/${user?.email}`);
-            return res.data;
-        },
-        enabled: isEnabled,
-        initialData: initialData,
-    });
-    console.log(guideBookings);
-    // reusable function
+            const res = await axiosSecure.get(`/booking/guideBase/${user.email}`)
+            return res?.data
+        }
+    })
 
-    const changeStatus = async (id, status) => {
-        const response = await axiosSecure.put(
-            `/booking?id=${id}&status=${status}`
-        );
-        return response.data;
-    };
 
-    const handleAccept = (id, status) => {
-        changeStatus(id, status).then((result) => {
-            if (result.acknowledged && result.modifiedCount) {
+
+    const handleAcceptAndReject = async (id, status) => {
+        try {
+            const { data } = await axiosSecure.put(`/booking`, { id, status })
+            console.log(data);
+            if (data.modifiedCount > 0) {
                 Swal.fire({
-                    title: "Updated!",
-                    text: `This Booking is ${status}.`,
-                    icon: "success",
-                    timer: 1500,
-                    showConfirmButton: false
-                });
+                    title: "Success!",
+                    text: 'Updated Successfully',
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false,
+                })
+                refetch()
             }
-            refetch();
-        });
+        }
+        catch (err) {
+            Swal.fire({
+                title: "info!",
+                text: err,
+                icon: 'error',
+                timer: 2500,
+                showConfirmButton: false,
+            })
+        }
     };
-    const handleReject = (id, status) => {
-        changeStatus(id, status).then((result) => {
-            if (result.acknowledged && result.modifiedCount) {
-                Swal.fire({
-                    title: "Updated!",
-                    text: `Booking is ${status}.`,
-                    icon: "success",
-                    timer: 1500,
-                    showConfirmButton: false
-                });
-            }
-            refetch();
-        });
-    };
+    // const handleReject = async (id, status) => {
+    //     const tourData = {
+    //         id, status
+    //     }
+    //     console.log(tourData);
+    //     try {
+    //         const { data } = await axiosSecure.put(`/booking`, tourData)
+    //         if (data.insertedId) {
+    //             Swal.fire({
+    //                 title: "Success!",
+    //                 text: 'Booked Successfully',
+    //                 icon: 'success',
+    //                 timer: 2000,
+    //                 showConfirmButton: false,
+    //             })
+    //             refetch()
+    //         }
+    //     }
+    //     catch (err) {
+    //         Swal.fire({
+    //             title: "info!",
+    //             text: err.response.data,
+    //             icon: 'error',
+    //             timer: 2500,
+    //             showConfirmButton: false,
+    //         })
+    //     }
+    // };
 
-    if (isLoading) return "Loading...";
     return (
         <div className="p-8">
             <div className="container mx-auto">
                 <div className="overflow-x-auto">
-                    <table className="min-w-full bg-white rounded-lg shadow-md">
-                        <thead className="bg-amber-600 rounded-lg text-white">
+                    <table className="table w-full">
+                        <thead>
                             <tr>
-                                <th className="py-3 px-4 text-left">Package</th>
-                                <th className="py-3 px-4 text-left">Tourist</th>
-                                <th className="py-3 px-4 text-left">Status</th>
-                                <th className="py-3 px-4 text-left"> Date</th>
-                                <th className="py-3 px-4 text-left"> Price</th>
-                                <th className="py-3 px-4 text-left">Change Status</th>
+                                <th>#</th>
+                                <th>Package</th>
+                                <th>Tourist</th>
+                                <th> Date</th>
+                                <th>Status</th>
+                                <th> Price</th>
+                                <th>Accept</th>
+                                <th>Reject</th>
                             </tr>
                         </thead>
-                        <tbody className="font-bold">
-                            {guideBookings &&
-                                guideBookings.map((booking, index) => {
-                                    return (
-                                        <tr
-                                            key={user._id}
-                                            className={`border-b border-gray-200 ${index % 2 === 0 ? "bg-gray-300" : "bg-blue-600"
-                                                }`}
+                        <tbody>
+                            {bookingData.map((booking, index) => (
+                                <tr key={booking._id}>
+                                    <td>{index + 1}</td>
+                                    <td>{booking.name}</td>
+                                    <td>{booking.userName}</td>
+                                    <td>{new Date(booking.date).toLocaleDateString()}</td>
+                                    <td>{booking.status}</td>
+                                    <td>&#8378;{booking.price}</td>
+                                    <td>
+                                        <button
+                                            disabled={booking.status !== 'In Review'}
+                                            onClick={() => handleAcceptAndReject(booking._id, "Accepted")}
+                                            className="btn btn-sm bg-green-400"
                                         >
-                                            <td className="py-3 px-4">{booking.package_title}</td>
-                                            <td className="py-3 px-4">{booking.tourist_name}</td>
-                                            <td className="py-3 px-4 text-sm">{booking.status}</td>
-                                            <td className="py-3 px-4">{booking.order_date}</td>
-                                            <td className="py-3 px-4">{booking.package_price}</td>
-                                            <td className="flex justify-center items-center px-3 gap-8">
-                                                <button
-                                                    onClick={() => handleAccept(booking._id, "Accepted")}
-                                                    className="p-2 border-none rounded-lg bg-green-400"
-                                                >
-                                                    Accept
-                                                </button>
-                                                <button
-                                                    onClick={() => handleReject(booking._id, "Rejected")}
-                                                    className="p-2 border-none rounded-lg bg-red-400"
-                                                >
-                                                    Reject
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
+                                            Accept
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button
+                                            disabled={booking.status !== 'In Review'}
+                                            onClick={() => handleAcceptAndReject(booking._id, "Rejected")}
+                                            className="btn btn-sm bg-red-400"
+                                        >
+                                            Reject
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
             </div>
+
         </div>
     );
 }

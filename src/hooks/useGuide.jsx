@@ -8,7 +8,7 @@ const useGuide = () => {
     const { data: isGuide, isLoading: isGuideLoading } = useQuery({
         queryKey: ['isGuide', user.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users/guide/${user.email}`)
+            const res = await axiosSecure.get(`users/guides/${user.email}`)
             return res.data.guide
         }
     })

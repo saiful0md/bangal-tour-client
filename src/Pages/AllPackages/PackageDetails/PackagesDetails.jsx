@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { Helmet } from "react-helmet-async";
 import { ImCross } from "react-icons/im";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -11,17 +11,22 @@ import TourGuideTable from "./TourGuideTable";
 
 const PackagesDetails = () => {
     const { user } = useAuth()
+    const navigate = useNavigate()
     const axiosSecure = useAxiosSecure()
     const [startDate, setStartDate] = useState(new Date());
     const [showModal, setShowModal] = useState(false)
-    const [tourGuide, setTourGuide] = useState('')
-    const [tourGuides, setTourGuides] = useState([])
+    const [selectedGuides, setSelectedGuides] = useState({})
     const [packageDetails, setPackage] = useState([])
     const { id } = useParams()
     const [guides] = useGuides()
-    console.log(tourGuide);
+
+    const handleChange = (e) => {
+        const selectedOptions = Array.from(e.target.selectedOptions);
+        const selectedGuideObjects = selectedOptions.map(option => guides.find(guide => guide.email === option.value));
+        setSelectedGuides(selectedGuideObjects);
+    };
+
     useEffect(() => {
-        setTourGuides(guides)
         const loadData = async () => {
             try {
                 const { data } = await axiosSecure.get(`/packages/${id}`);
@@ -41,6 +46,7 @@ const PackagesDetails = () => {
 
     const { name, image1, image2, image3, image4, plan1, plan2, plan3, plan4, price, description, type } = packageDetails;
 
+
     // modale confirm
     const handleBooking = e => {
         e.preventDefault();
@@ -53,14 +59,13 @@ const PackagesDetails = () => {
         const userEmail = user.email;
         const userImage = user.photoURL;
         const date = startDate;
-        const guide = tourGuide;
         const tourData = {
             name,
             userName,
             userImage,
             userEmail,
             date,
-            guide,
+            guide: selectedGuides,
             price,
             image1,
             type,
@@ -82,7 +87,7 @@ const PackagesDetails = () => {
                     showConfirmButton: false,
                 })
                 setShowModal(false)
-                // navigate('/bookedServices')
+                navigate('/dashboard/bookings')
             }
         }
         catch (err) {
@@ -173,7 +178,7 @@ const PackagesDetails = () => {
                         </thead>
                         <tbody>
                             {
-                                guides.map((item, index) => <TourGuideTable key={item._id} item={item} index={index}></TourGuideTable>)
+                                guides?.map((item, index) => <TourGuideTable key={item._id} item={item} index={index}></TourGuideTable>)
                             }
                         </tbody>
                     </table>
@@ -230,12 +235,13 @@ const PackagesDetails = () => {
                             <label className="label">
                                 <span className="label-text">Tour guide name</span>
                             </label>
-                            <select value={tourGuide}
+                            <select
+                                // value={tourGuide}
                                 className="border outline-none p-3 rounded-lg"
-                                onChange={(e) => setTourGuide(e.target.value)}>
+                                onChange={handleChange}>
                                 <option value="">Select Tour Guide</option>
                                 {
-                                    tourGuides.map(guide => <option key={guide._id} value={guide.name}>{guide.name}</option>)
+                                    guides.map(guide => <option key={guide._id} value={guide.email}>{guide.name}</option>)
                                 }
                             </select>
                         </div>
@@ -248,6 +254,7 @@ const PackagesDetails = () => {
                         Book Now
                     </button>
                 </div>
+                {/* modal code */}
                 {showModal &&
                     <div className="hero-content flex-col h-[300px] w-[500px] absolute top-1/3 bottom-1/2 left-[320px] z-10 ">
                         <div className="card shadow-2xl w-full h-full bg-base-100">

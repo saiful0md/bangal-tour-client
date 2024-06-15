@@ -21,6 +21,7 @@ const SignUp = () => {
                         const userInfo = {
                             email: data.email,
                             name: data.name,
+                            image: data.photoUrl,
                             role: 'tourist',
                             roleStatus: 'verified'
                         }

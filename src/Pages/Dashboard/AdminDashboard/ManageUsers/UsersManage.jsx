@@ -3,32 +3,22 @@
 import { useState } from "react";
 import Select from 'react-select';
 import Swal from "sweetalert2";
-import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useGetUsers from "../../../../hooks/useGetUsers";
-import useUserCount from "../../../../hooks/useUserCount";
 const UsersManage = () => {
 
 
     const axiosSecure = useAxiosSecure();
-    const { user } = useAuth();
     const [name, setName] = useState("");
     const [selectedRole, setSelectedRole] = useState("");
-    const [currentPage, setCurrentPage] = useState(1);
 
-    const { usersCount } = useUserCount();
-    const itemPerPage = 10;
-    const numberOfPages = Math.ceil(usersCount / itemPerPage);
+    // const itemPerPage = 10;
+    // const numberOfPages = Math.ceil(usersCount / itemPerPage);
 
-    const pages = [...Array(numberOfPages).keys()];
+    // const pages = [...Array(numberOfPages).keys()];
 
     // passing values to custom hook
-    const { users, isLoading, refetch } = useGetUsers(
-        name,
-        selectedRole,
-        currentPage,
-        itemPerPage
-    );
+    const { users, isLoading, refetch } = useGetUsers(name, selectedRole,  );
     // react select options
     const options = [
         { value: "admin", label: "Admin" },
@@ -36,10 +26,11 @@ const UsersManage = () => {
         { value: "tourist", label: "Tourist" },
     ];
 
-    const handleUserRole = async (id, role) => {
-        const response = await axiosSecure.put(`/users?id=${id}&role=${role}`);
-        console.log(response);
-        if (response.data.modifiedCount) {
+    const handleUserRole = async (role, roleStatus, email) => {
+
+        const response = await axiosSecure.patch(`/users/update/${email}`, { role, roleStatus });
+        console.log(response.data);
+        if (response.data.modifiedCount > 0) {
             Swal.fire({
                 title: "Updated!",
                 text: `User role updated to ${role}.`,
@@ -123,7 +114,7 @@ const UsersManage = () => {
                                         <td>
                                             <button
                                                 disabled={user.role !== "tourist"}
-                                                onClick={() => handleUserRole(user._id, "admin", user.email)}
+                                                onClick={() => handleUserRole("admin", 'verified', user.email)}
                                                 className="btn btn-sm"
                                             >
                                                 Make Admin
@@ -131,7 +122,7 @@ const UsersManage = () => {
                                         </td>
                                         <td>
                                             <button
-                                                onClick={() => handleUserRole(user._id, "guide", user.email)}
+                                                onClick={() => handleUserRole("guide", 'verified', user.email)}
                                                 disabled={user.role !== "tourist"}
                                                 className="btn btn-sm"
                                             >
@@ -144,46 +135,7 @@ const UsersManage = () => {
                         </table>
                     </div>
                 </div>
-                <div className="my-2 flex justify-center gap-2">
-                    <button
-                        onClick={() => {
-                            if (currentPage > 1) {
-                                setCurrentPage(currentPage - 1);
-                            }
-                            refetch();
-                        }}
-                        className={`border-2 px-4 py-2`}
-                    >
-                        Previous
-                    </button>
-                    {pages &&
-                        pages.map((page) => {
-                            return (
-                                <button
-                                    onClick={() => {
-                                        setCurrentPage(page + 1);
-                                        refetch();
-                                    }}
-                                    className={`border-2  px-4 py-2 ${currentPage === page + 1 ? "bg-amber-500" : ""
-                                        }`}
-                                    key={page}
-                                >
-                                    {page + 1}
-                                </button>
-                            );
-                        })}
-                    <button
-                        onClick={() => {
-                            if (currentPage < numberOfPages) {
-                                setCurrentPage(currentPage + 1);
-                                refetch();
-                            }
-                        }}
-                        className={`border-2  px-4 py-2`}
-                    >
-                        Next
-                    </button>
-                </div>
+               
             </div>
         </div>
     );

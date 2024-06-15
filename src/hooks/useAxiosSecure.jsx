@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-    // baseURL: 'https://assignment-12-server-sigma-coral.vercel.app'
     baseURL: 'http://localhost:5000'
+    // baseURL: 'https://assignment-12-server-sigma-coral.vercel.app'
 })
 const useAxiosSecure = () => {
     const {logOut} = useAuth()
@@ -22,7 +22,7 @@ const useAxiosSecure = () => {
     axiosSecure.interceptors.response.use(function (response){
         return response
     }, async(error)=>{
-        const status = error.response.status
+        const status = error.response?.status
         if(status === 401 ||  status === 403){
             await logOut();
             navigate('/logIn')

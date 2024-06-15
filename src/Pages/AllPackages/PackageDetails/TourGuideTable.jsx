@@ -21,7 +21,7 @@ const TourGuideTable = ({item, index}) => {
                     {item.name}
                 </td>
                 <td>
-                    {item.contactDetails}
+                    {item.contact}
                 </td>
                 <td>
                     <Link to={`/tourGuideDetails/${item._id}`}>

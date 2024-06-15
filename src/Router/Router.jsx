@@ -63,6 +63,7 @@ const Router = createBrowserRouter([
         element: <PriveteRoute><Dashboard></Dashboard></PriveteRoute>,
         children: [
             // Admin Routes
+            
             {
                 path: 'adminProfile',
                 element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>

@@ -9,13 +9,14 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 const Booking = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
-    const { data: bookingData = [], refetch } = useQuery({
+         const { data: bookingData = [], refetch } = useQuery({
         queryKey: ['booking', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/booking/${user?.email}`)
-            return res.data
+            return res?.data
         }
-    })
+    })      
+   
     // handleDelete
     const handleDelete = (id) => {
         Swal.fire({
@@ -77,36 +78,38 @@ const Booking = () => {
                         </thead>
                         <tbody>
                             {
-                                bookingData?.map((item, index) => <tr key={item._id}>
+                                bookingData?.map((booking, index) => <tr key={booking._id}>
                                     <th>{index + 1}</th>
-                                    <td>{item.name}</td>
-                                    <td> {item.guide}</td>
-                                    <td> &#8378;{item.price}</td>
-                                    <td> {new Date(item.date).toLocaleDateString()}</td>
-                                    <td> {item.status}</td>
+                                    <td>{booking.name}</td>
+                                    <td> {booking.guide.map(guideInfo => guideInfo.name)}</td>
+                                    <td> &#8378;{booking.price}</td>
+                                    <td> {new Date(booking.date).toLocaleDateString()}</td>
+                                    <td> {booking.status}</td>
                                     <th>
                                         <button
                                             className="btn btn-sm bg-amber-500 hover:bg-amber-600 text-white"
-                                            onClick={() => handlePay(item._id)}
-                                            disabled={item.status !== 'Accepted'}
+                                            onClick={() => handlePay(booking._id)}
+                                            disabled={booking.status !== 'Accepted'}
                                         >Pay</button>
                                     </th>
                                     <th>
                                         <button
-                                            onClick={() => handleDelete(item._id)}
-                                            disabled={item.status !== 'In Review'}
+                                            onClick={() => handleDelete(booking._id)}
+                                            disabled={booking.status !== 'In Review'}
                                             className="btn btn-ghost btn-xs"
                                         >
                                             <FaTrashAlt className="text-lg" />
                                         </button>
                                     </th>
-                                </tr>)
+                                </tr>
+                                )
                             }
 
                         </tbody>
 
                     </table>
-                </div>}
+                </div>
+                }
             </div>
         </div>
     );
