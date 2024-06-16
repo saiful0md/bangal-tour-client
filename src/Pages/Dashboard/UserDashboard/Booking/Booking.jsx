@@ -1,12 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { FaTrashAlt } from "react-icons/fa";
+import { ImCross } from "react-icons/im";
 import Swal from "sweetalert2";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 
 const Booking = () => {
+    const [showModal, setShowModal] = useState(false)
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
          const { data: bookingData = [], refetch } = useQuery({
@@ -44,6 +47,10 @@ const Booking = () => {
         });
     }
     const handlePay = () => {
+        setShowModal(true)
+        console.log('submit pay');
+    }
+    const handlePayConfirm =() =>{
 
     }
     return (
@@ -111,6 +118,21 @@ const Booking = () => {
                 </div>
                 }
             </div>
+             {/* modal code */}
+             {showModal &&
+                    <div className="hero-content flex-col h-[300px] w-[500px] absolute top-1/3 bottom-1/2 left-[320px] z-10 ">
+                        <div className="card shadow-2xl w-full h-full bg-base-100">
+                            <div onClick={() => { setShowModal(false) }} className="cursor-pointer bg-rose-600 hover:bg-rose-700 w-8 h-8 flex items-center justify-center rounded-full ml-6 mt-6">
+                                <ImCross className="text-white"></ImCross>
+                            </div>
+                            <div className="flex flex-col gap-6 items-center">
+                                <h2 className="text-4xl">Confirm your Booking</h2>
+                                <p>Are you sure you want to book this package?</p>
+                                <button onClick={handlePayConfirm} className="btn  bg-amber-500 text-white hover:bg-amber-600 ">Confirm</button>
+                            </div>
+                        </div>
+                    </div>
+                }
         </div>
     );
 };

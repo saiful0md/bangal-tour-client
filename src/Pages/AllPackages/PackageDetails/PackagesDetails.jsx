@@ -236,7 +236,6 @@ const PackagesDetails = () => {
                                 <span className="label-text">Tour guide name</span>
                             </label>
                             <select
-                                // value={tourGuide}
                                 className="border outline-none p-3 rounded-lg"
                                 onChange={handleChange}>
                                 <option value="">Select Tour Guide</option>
