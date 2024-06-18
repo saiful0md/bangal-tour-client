@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import Profile from "../../Common/Profile";
 
 
 const GuideProfile = () => {
@@ -12,7 +11,7 @@ const GuideProfile = () => {
     const { data: guide = [] } = useQuery({
         queryKey: ['guide', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users/${user?.email}`)
+            const res = await axiosSecure.get(`/users/guide-profile/${user?.email}`)
             return res.data
         }
     })
@@ -57,8 +56,22 @@ const GuideProfile = () => {
         <div>
             <Helmet>
                 <title>Bangal Tour | Guide Profile</title>
-            </Helmet>
-            <Profile></Profile>
+            </Helmet> <div className='max-h-screen flex items-center justify-center max-w-3xl mx-auto'>
+                <div className="max-w-2xl mx-auto my-10  w-full">
+                    <h2 className="text-3xl font-semibold text-center my-10 ">My Profile</h2>
+                    <div className="card  bg-base-100 shadow-xl">
+                        <figure><img className="h-24 w-24 rounded-full" src={user?.photoURL} alt={guide.name} /></figure>
+                        <div className='flex justify-center mt-4 items-center'>
+                            <h2 className='badge badge-accent'>{guide.role}</h2>
+                        </div>
+                        <div className="card-body items-center">
+                            <h2><span className="font-bold">Name:</span> {guide.name}</h2>
+                            <p><span className="font-bold">Email:</span> {guide.email}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/* update profile form */}
             <div className="hero-content ">
                 <div className="card shrink-0 w-full max-w-2xl shadow-2xl bg-base-100">
                     <div className="text-center py-10">

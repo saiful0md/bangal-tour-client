@@ -20,9 +20,9 @@ const TourAssign = () => {
 
 
     const handleAcceptAndReject = async (id, status) => {
+        
         try {
-            const { data } = await axiosSecure.put(`/booking`, { id, status })
-            console.log(data);
+            const { data } = await axiosSecure.put(`/booking/${id}`, {  status })
             if (data.modifiedCount > 0) {
                 Swal.fire({
                     title: "Success!",
@@ -44,35 +44,7 @@ const TourAssign = () => {
             })
         }
     };
-    // const handleReject = async (id, status) => {
-    //     const tourData = {
-    //         id, status
-    //     }
-    //     console.log(tourData);
-    //     try {
-    //         const { data } = await axiosSecure.put(`/booking`, tourData)
-    //         if (data.insertedId) {
-    //             Swal.fire({
-    //                 title: "Success!",
-    //                 text: 'Booked Successfully',
-    //                 icon: 'success',
-    //                 timer: 2000,
-    //                 showConfirmButton: false,
-    //             })
-    //             refetch()
-    //         }
-    //     }
-    //     catch (err) {
-    //         Swal.fire({
-    //             title: "info!",
-    //             text: err.response.data,
-    //             icon: 'error',
-    //             timer: 2500,
-    //             showConfirmButton: false,
-    //         })
-    //     }
-    // };
-
+   
     return (
         <div className="p-8">
             <div className="container mx-auto">

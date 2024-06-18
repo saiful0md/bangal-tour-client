@@ -10,6 +10,7 @@ import UsersManage from '../Pages/Dashboard/AdminDashboard/ManageUsers/UsersMana
 import TourAssign from '../Pages/Dashboard/TourGuideDashboard/AssignedTour/TourAssign';
 import GuideProfile from '../Pages/Dashboard/TourGuideDashboard/GuideProfile/GuideProfile';
 import Booking from '../Pages/Dashboard/UserDashboard/Booking/Booking';
+import Payment from '../Pages/Dashboard/UserDashboard/Booking/Payment';
 import RequestToAdmin from '../Pages/Dashboard/UserDashboard/RequestToAdmin/RequestToAdmin';
 import UserProfile from '../Pages/Dashboard/UserDashboard/UserProfile/UserProfile';
 import Wishlist from '../Pages/Dashboard/UserDashboard/Wishlist/Wishlist';
@@ -74,7 +75,6 @@ const Router = createBrowserRouter([
             },
             {
                 path: 'manageUser',
-                // element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
                 element: <AdminRoute><UsersManage></UsersManage></AdminRoute>
                 
             },
@@ -89,7 +89,6 @@ const Router = createBrowserRouter([
             },
             {
                 path:'assignedTour',
-                // element:<AssignedTour></AssignedTour>
                 element:<TourAssign></TourAssign>
             },
             // User Routes
@@ -108,6 +107,10 @@ const Router = createBrowserRouter([
             {
                 path: 'requset-to-admin',
                 element:<RequestToAdmin></RequestToAdmin>
+            },
+            {
+                path: 'payment/:id',
+                element:<Payment></Payment>
             }
 
 

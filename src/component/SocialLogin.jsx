@@ -19,7 +19,7 @@ const SocialLogIn = () => {
                 }
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
-                        console.log(res.data);
+                       
                         if (res.data) {
                             Swal.fire({
                                 icon: 'success',
