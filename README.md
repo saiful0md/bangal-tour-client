@@ -12,20 +12,14 @@ Currently, two official plugins are available:
 # live link
 - https://splendid-licorice-75aad6.netlify.app
 
-# npm package
-- axios
-- firebase
-- localforage
-- match-sorter
-- prop-types
-- react
-- react-awesome-reveal
-- react-datepicker
-- react-dom
-- react-fast-marquee
-- react-helmet-async
-- react-icons
-- react-router-dom
-- sort-by
-- sweetalert2
-- swiper
+
+## Installation
+
+Use the package manager 
+
+```bash
+npm install
+```
+
+## Usage
+
