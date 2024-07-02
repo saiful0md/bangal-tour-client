@@ -23,3 +23,7 @@ npm install
 
 ## Usage
 
+- firebase
+- prop-types
+- @tanstack/react-query
+- react-router-dom
