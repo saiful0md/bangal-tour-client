@@ -79,7 +79,12 @@ const Booking = () => {
                                 bookingData?.map((booking, index) => <tr key={booking._id}>
                                     <th>{index + 1}</th>
                                     <td>{booking.name}</td>
-                                    <td> {booking.guide.map(guideInfo => guideInfo.name)}</td>
+                                    <td> {console.log(booking.guide)} {/* This will print the guide data */}
+                                        {Array.isArray(booking.guide) ? (
+                                            booking.guide.map(guideInfo => guideInfo.name)
+                                        ) : (
+                                            <span>No guide info available</span>
+                                        )}</td>
                                     <td> &#8378;{booking.price}</td>
                                     <td> {new Date(booking.date).toLocaleDateString()}</td>
                                     <td> {booking.status}</td>
